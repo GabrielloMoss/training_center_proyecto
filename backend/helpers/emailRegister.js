@@ -3,11 +3,13 @@ import nodemailer from 'nodemailer';
 
 const emailRegister= async(datos)=>{
     const transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
+        service: "Gmail",
+        host:"smtp.gmail.com",
+        port: 465,
+        secure: true,
         auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
+          user: "gabrielcarrascomillao@gmail.com",
+          pass: "cakmcbastoslnnxv",
         }
       });
       const {email, name, token} = datos;
@@ -17,11 +19,11 @@ const emailRegister= async(datos)=>{
         subject: "valida tu cuenta en Strong Gym",
         text:"valida tu cuenta en Strong Gym",
         html:`<p> Hola: ${name}, valida tu cuenta en Strong Gym  </p>
-        html:<p> para comprobar tu cuenta visita el siguiente enlace: 
-        <a href="${process.env.FRONTEND_URL}/confirmar/${token}">Comprobar cuenta</a></p>`
+        <p> para comprobar tu cuenta visita el siguiente enlace: 
+        <a href="http://localhost:3000/confirmar/${token}">Comprobar cuenta</a></p>`
         
     })
-    console.log('mensaje enviado:%s, info.messageId')
+    console.log("mensaje enviado:%s", info.messageId)
 }
 
 export default emailRegister;
